@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reservierung | Zur Alten Freundschaft</title>
+    <meta name="description" content="Reservierungen und Anfragen für Zur Alten Freundschaft in Görlitz.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&amp;family=Miniver&amp;family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body class="bites-page">
+    <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
+
+    <header class="bites-header">
+      <div class="bites-header-inner">
+        <a class="bites-brand" href="index.html" aria-label="Zur Alten Freundschaft">
+          <img src="assets/images/logo-small.png" alt="Zur Alten Freundschaft">
+        </a>
+        <button class="bites-menu-toggle" type="button" aria-expanded="false" aria-controls="bites-nav">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span class="visually-hidden">Menü öffnen</span>
+        </button>
+        <nav class="bites-nav" id="bites-nav" aria-label="Hauptnavigation">
+          <a href="index.html">Startseite</a>
+          <a href="restaurant.html">Restaurant</a>
+          <a href="kegelbahn.html">Kegelbahn</a>
+          <a href="catering.html">Catering</a>
+        </nav>
+        <a class="bites-reserve" href="reservierung.html">Reservieren</a>
+      </div>
+    </header>
+
+    <main id="inhalt">
+      <section class="bites-subhero reservation-hero logo-watermark">
+        <div class="bites-container">
+          <div class="bites-subhero-copy">
+            <p class="script-title">kontakt aufnehmen</p>
+            <h1>Reservieren und anfragen</h1>
+            <p>Restaurant, Kegelbahn, Feier oder Catering: ein Formular, klare Auswahl, schnelle Kontaktaufnahme.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="bites-band light logo-watermark light-mark">
+        <div class="bites-container bites-cta-grid">
+          <div class="bites-copy">
+            <p class="script-title">ihre nachricht</p>
+            <h2>Was dürfen wir planen?</h2>
+            <p>Die helle Formularfläche wirkt ruhiger als die Startbereiche und passt gut zum eigentlichen Zweck dieser Seite. In der lokalen HTML-Version wird nichts versendet.</p>
+            <ul class="bites-list">
+              <li>Datum und Uhrzeit, soweit schon bekannt.</li>
+              <li>Personenzahl und Anlass.</li>
+              <li>Ob Restaurant, Kegelbahn oder Catering gewünscht ist.</li>
+            </ul>
+          </div>
+          <form class="bites-inquiry-form" data-local-form>
+            <div class="bites-form-row">
+              <label for="booking-name">Name *</label>
+              <input id="booking-name" name="name" autocomplete="name" required>
+            </div>
+            <div class="bites-form-row">
+              <label for="booking-contact">Telefon oder E-Mail *</label>
+              <input id="booking-contact" name="contact" autocomplete="email" required>
+            </div>
+            <div class="bites-form-row">
+              <label for="booking-date">Datum und Uhrzeit</label>
+              <input id="booking-date" name="date" type="datetime-local">
+            </div>
+            <div class="bites-form-row">
+              <label for="booking-type">Anlass</label>
+              <select id="booking-type" name="booking-type">
+                <option>Tischreservierung</option>
+                <option>Kegelbahn &amp; Tisch</option>
+                <option>Catering-Anfrage</option>
+                <option>Feier / Veranstaltung</option>
+              </select>
+            </div>
+            <div class="bites-form-row full">
+              <label for="booking-message">Nachricht *</label>
+              <textarea id="booking-message" name="message" rows="5" required></textarea>
+            </div>
+            <label class="bites-check full">
+              <input type="checkbox" required>
+              Ich bin mit der Kontaktaufnahme zu meiner Anfrage einverstanden. *
+            </label>
+            <div class="bites-form-actions full">
+              <button class="bites-button" type="submit">Anfrage senden</button>
+              <p class="form-status" aria-live="polite"></p>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section class="bites-band dark logo-watermark">
+        <div class="bites-container bites-map-layout">
+          <div class="bites-copy">
+            <p class="script-title">direktkontakt</p>
+            <h2>Telefon, E-Mail und Adresse</h2>
+            <p>Für kurzfristige Reservierungen ist ein Anruf meist der schnellste Weg. Die Karte zeigt den Standort direkt in Görlitz.</p>
+            <div class="bites-contact-box bites-contact-compact">
+              <a href="tel:+493581879499">03581 87 94 99</a>
+              <a href="tel:+491711430783">0171 1430783</a>
+              <a href="mailto:info@zur-alten-freundschaft.de">info@zur-alten-freundschaft.de</a>
+              <span>Biesnitzer Str. 29, 02826 Görlitz</span>
+            </div>
+          </div>
+          <div class="bites-map-panel">
+            <iframe
+              title="Google Maps Karte: Zur Alten Freundschaft, Biesnitzer Str. 29, Görlitz"
+              src="https://www.google.com/maps?q=Biesnitzer%20Str.%2029%2C%2002826%20G%C3%B6rlitz&amp;output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <a class="bites-map-pin" href="https://www.google.com/maps/search/?api=1&amp;query=Biesnitzer%20Str.%2029%2C%2002826%20G%C3%B6rlitz" target="_blank" rel="noreferrer" aria-label="Zur Alten Freundschaft auf Google Maps öffnen">
+              <span></span>
+            </a>
+            <div class="bites-map-overlay">
+              <span class="bites-map-logo-wrap">
+                <img class="bites-map-logo" src="assets/images/logo-small.png" alt="Zur Alten Freundschaft">
+              </span>
+              <p>Biesnitzer Str. 29<br>02826 Görlitz</p>
+              <a class="bites-button outline" href="https://www.google.com/maps/search/?api=1&amp;query=Biesnitzer%20Str.%2029%2C%2002826%20G%C3%B6rlitz" target="_blank" rel="noreferrer">Route öffnen</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="page-footer bites-footer">
+      <nav class="footer-nav" aria-label="Fußnavigation">
+        <a href="index.html">Startseite</a>
+        <a href="restaurant.html">Restaurant</a>
+        <a href="kegelbahn.html">Kegelbahn</a>
+        <a href="catering.html">Catering</a>
+        <a href="reservierung.html">Reservierung</a>
+        <a href="impressum.html">Impressum und Datenschutz</a>
+      </nav>
+      <p>Zur Alten Freundschaft | Biesnitzer Str. 29 | 02826 Görlitz | 0171 1430783</p>
+      <img class="footer-logo" src="assets/images/logo-small.png" alt="Zur Alten Freundschaft Logo">
+    </footer>
+    <div class="cookie-banner" data-cookie-banner role="region" aria-label="Cookie-Hinweis">
+      <div>
+        <strong>Cookie-Hinweis</strong>
+        <p>Diese Website nutzt nur technisch notwendige Funktionen. Externe Inhalte wie Google Maps können Daten an Drittanbieter übertragen.</p>
+      </div>
+      <div class="cookie-actions">
+        <a href="impressum.html">Datenschutz</a>
+        <button type="button" data-cookie-accept>Verstanden</button>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
