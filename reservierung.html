@@ -52,7 +52,7 @@
           <div class="bites-subhero-copy">
             <p class="script-title">kontakt aufnehmen</p>
             <h1>Reservieren und anfragen</h1>
-            <p>Restaurant, Kegelbahn, Feier oder Catering: ein Formular, klare Auswahl, schnelle Kontaktaufnahme.</p>
+            <p>Ob Restaurantbesuch, Kegelabend, Feier oder Catering: Schreiben Sie uns kurz, was Sie planen. Wir melden uns zeitnah zurück.</p>
           </div>
         </div>
       </section>
@@ -62,29 +62,57 @@
           <div class="bites-copy">
             <p class="script-title">ihre nachricht</p>
             <h2>Was dürfen wir planen?</h2>
-            <p>Die helle Formularfläche wirkt ruhiger als die Startbereiche und passt gut zum eigentlichen Zweck dieser Seite. In der lokalen HTML-Version wird nichts versendet.</p>
+            <p>Teilen Sie uns einfach Wunschtermin, Personenzahl und Anlass mit. Je genauer Ihre Angaben sind, desto besser können wir den passenden Rahmen vorbereiten.</p>
             <ul class="bites-list">
               <li>Datum und Uhrzeit, soweit schon bekannt.</li>
               <li>Personenzahl und Anlass.</li>
               <li>Ob Restaurant, Kegelbahn oder Catering gewünscht ist.</li>
             </ul>
           </div>
-          <form class="bites-inquiry-form" data-local-form>
+          <form class="bites-inquiry-form" action="https://formsubmit.co/info@zur-alten-freundschaft.de" method="POST">
+            <input type="hidden" name="_subject" value="Neue Anfrage über zur-alten-freundschaft.de">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="https://www.zur-alten-freundschaft.de/danke.html">
+            <input type="text" name="_honey" class="form-honey" tabindex="-1" autocomplete="off" aria-hidden="true">
             <div class="bites-form-row">
               <label for="booking-name">Name *</label>
-              <input id="booking-name" name="name" autocomplete="name" required>
+              <input id="booking-name" name="Name" autocomplete="name" required>
             </div>
             <div class="bites-form-row">
               <label for="booking-contact">Telefon oder E-Mail *</label>
-              <input id="booking-contact" name="contact" autocomplete="email" required>
+              <input id="booking-contact" name="Telefon oder E-Mail" autocomplete="email" required>
             </div>
             <div class="bites-form-row">
-              <label for="booking-date">Datum und Uhrzeit</label>
-              <input id="booking-date" name="date" type="datetime-local">
+              <label for="booking-date">Datum</label>
+              <input id="booking-date" name="Datum" type="date">
+            </div>
+            <div class="bites-form-row">
+              <label for="booking-time">Uhrzeit</label>
+              <select id="booking-time" name="Uhrzeit">
+                <option value="">Bitte wählen</option>
+                <option>11:30</option>
+                <option>12:00</option>
+                <option>12:30</option>
+                <option>13:00</option>
+                <option>13:30</option>
+                <option>14:00</option>
+                <option>17:00</option>
+                <option>17:30</option>
+                <option>18:00</option>
+                <option>18:30</option>
+                <option>19:00</option>
+                <option>19:30</option>
+                <option>20:00</option>
+                <option>20:30</option>
+                <option>21:00</option>
+                <option>21:30</option>
+                <option>22:00</option>
+              </select>
             </div>
             <div class="bites-form-row">
               <label for="booking-type">Anlass</label>
-              <select id="booking-type" name="booking-type">
+              <select id="booking-type" name="Anlass">
                 <option>Tischreservierung</option>
                 <option>Kegelbahn &amp; Tisch</option>
                 <option>Catering-Anfrage</option>
@@ -93,10 +121,10 @@
             </div>
             <div class="bites-form-row full">
               <label for="booking-message">Nachricht *</label>
-              <textarea id="booking-message" name="message" rows="5" required></textarea>
+              <textarea id="booking-message" name="Nachricht" rows="5" required></textarea>
             </div>
             <label class="bites-check full">
-              <input type="checkbox" required>
+              <input type="checkbox" name="Einverständnis zur Kontaktaufnahme" value="Ja" required>
               Ich bin mit der Kontaktaufnahme zu meiner Anfrage einverstanden. *
             </label>
             <div class="bites-form-actions full">
