@@ -2610,6 +2610,34 @@ dialog.lightbox::backdrop {
   align-items: start;
 }
 
+.bites-reservation-link-card {
+  min-height: 360px;
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: 18px;
+  padding: clamp(30px, 5vw, 58px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background:
+    linear-gradient(135deg, rgba(11, 22, 26, 0.88), rgba(168, 41, 47, 0.34)),
+    url("assets/images/restaurant-12.jpg") center / cover;
+  box-shadow: 0 26px 70px rgba(0, 0, 0, 0.2);
+}
+
+.bites-reservation-link-card h3 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(2.1rem, 5vw, 4.8rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.bites-reservation-link-card p:not(.script-title) {
+  max-width: 520px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+}
+
 .bites-map-card {
   min-height: 360px;
   display: grid;
