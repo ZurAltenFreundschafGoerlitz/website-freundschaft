@@ -106,16 +106,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const countUpNumbers = document.querySelectorAll("[data-count-up]");
   const revealBlocks = document.querySelectorAll("[data-reveal]");
-  const animateCount = (number) => {
+  const animateCount = (number, options = {}) => {
     if (number.closest(".kegel-scroll-story")) return;
-    if (number.dataset.counted === "true") return;
+    if (!options.repeat && number.dataset.counted === "true") return;
     number.dataset.counted = "true";
 
     const target = Number(number.dataset.countUp);
     const duration = Number(number.dataset.duration) || 1200;
     const start = performance.now();
+    const animationId = `${start}-${Math.random()}`;
+    number.dataset.countAnimationId = animationId;
+    number.textContent = "0";
 
     const tick = (now) => {
+      if (number.dataset.countAnimationId !== animationId) return;
       const progress = Math.min((now - start) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
       number.textContent = Math.round(target * eased).toString();
@@ -134,9 +138,19 @@ document.addEventListener("DOMContentLoaded", () => {
     if ("IntersectionObserver" in window) {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          animateCount(entry.target);
-          observer.unobserve(entry.target);
+          const repeat = Boolean(entry.target.closest(".kegel-hero-card"));
+
+          if (entry.isIntersecting) {
+            animateCount(entry.target, { repeat });
+            if (!repeat) observer.unobserve(entry.target);
+            return;
+          }
+
+          if (repeat) {
+            entry.target.dataset.counted = "false";
+            entry.target.dataset.countAnimationId = "";
+            entry.target.textContent = "0";
+          }
         });
       }, { threshold: 0.45 });
 
