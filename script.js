@@ -32,6 +32,29 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  const floatingPhone = document.createElement("a");
+  floatingPhone.className = "floating-phone";
+  floatingPhone.href = "tel:+491711430783";
+  floatingPhone.setAttribute("aria-label", "0171 1430783 anrufen");
+  floatingPhone.innerHTML = `
+    <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.19 18a19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 1.27 3.38 2 2 0 0 1 3.25 1.2h3a2 2 0 0 1 2 1.72c.12.9.32 1.77.59 2.61a2 2 0 0 1-.45 2.11L7.1 8.93a16 16 0 0 0 6 6l1.29-1.29a2 2 0 0 1 2.11-.45c.84.27 1.71.47 2.61.59A2 2 0 0 1 22 16.92Z"/>
+    </svg>
+  `;
+  document.body.append(floatingPhone);
+
+  const bookingDate = document.querySelector("#booking-date");
+  const openDatePicker = () => {
+    if (typeof bookingDate?.showPicker !== "function") return;
+    try {
+      bookingDate.showPicker();
+    } catch (_error) {
+      // Some browsers only allow the picker from a direct user interaction.
+    }
+  };
+  bookingDate?.addEventListener("click", openDatePicker);
+  bookingDate?.addEventListener("focus", openDatePicker);
+
   document.querySelectorAll("form[data-local-form]").forEach((form) => {
     form.addEventListener("submit", (event) => {
       event.preventDefault();

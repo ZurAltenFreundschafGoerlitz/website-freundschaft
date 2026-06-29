@@ -926,6 +926,59 @@ dialog.lightbox::backdrop {
   color: var(--bites-accent-soft);
 }
 
+@media (max-width: 1180px) and (min-width: 901px) {
+  .bites-header-inner {
+    grid-template-columns: 190px 1fr auto;
+    gap: 16px;
+  }
+
+  .bites-brand img {
+    width: 170px;
+  }
+
+  .bites-nav {
+    gap: 20px;
+    font-size: 0.72rem;
+  }
+
+  .bites-header .bites-reserve {
+    padding-inline: 20px;
+  }
+}
+
+.floating-phone {
+  position: fixed;
+  right: clamp(16px, 3vw, 34px);
+  bottom: clamp(18px, 4vw, 36px);
+  z-index: 40;
+  width: 58px;
+  height: 58px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #141e21;
+  background: var(--bites-accent-soft);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 999px;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.32);
+  text-decoration: none;
+  transition: transform 180ms ease, background 180ms ease, color 180ms ease;
+}
+
+.floating-phone:hover,
+.floating-phone:focus-visible {
+  color: #fff;
+  background: var(--bites-accent);
+  outline: none;
+  transform: translateY(-2px);
+}
+
+.floating-phone svg {
+  width: 25px;
+  height: 25px;
+  fill: currentColor;
+}
+
 .bites-button.outline:hover,
 .bites-button.outline:focus-visible {
   background: var(--bites-accent);
@@ -2997,6 +3050,18 @@ dialog.lightbox::backdrop {
 }
 
 @media (max-width: 900px) {
+  .floating-phone {
+    width: 52px;
+    height: 52px;
+    right: 14px;
+    bottom: 14px;
+  }
+
+  .floating-phone svg {
+    width: 23px;
+    height: 23px;
+  }
+
   .bites-header-inner {
     grid-template-columns: 42px minmax(0, 1fr) 42px;
     grid-template-areas:
