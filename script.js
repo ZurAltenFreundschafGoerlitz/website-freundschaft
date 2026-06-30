@@ -1,4 +1,37 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const closureNoticeEnd = new Date("2026-07-09T00:00:00+02:00").getTime();
+  const closureNoticeDismissed = window.sessionStorage.getItem("freundschaftClosureNotice") === "dismissed";
+  if (Date.now() < closureNoticeEnd && !closureNoticeDismissed) {
+    const closureNotice = document.createElement("section");
+    closureNotice.className = "closure-notice";
+    closureNotice.setAttribute("role", "dialog");
+    closureNotice.setAttribute("aria-modal", "true");
+    closureNotice.setAttribute("aria-labelledby", "closure-notice-title");
+    closureNotice.innerHTML = `
+      <div class="closure-notice-card">
+        <p class="script-title">kurzer hinweis</p>
+        <h2 id="closure-notice-title">Am 4. und 5. Juli geschlossen</h2>
+        <p>Am Samstag, den 4. Juli, und Sonntag, den 5. Juli bleibt die Gaststätte geschlossen. Ab Mittwoch, dem 8. Juli, sind wir wieder wie gewohnt für Sie da.</p>
+        <button type="button" class="bites-button" data-closure-close>Verstanden</button>
+      </div>
+    `;
+    document.body.append(closureNotice);
+
+    const closeNotice = () => {
+      window.sessionStorage.setItem("freundschaftClosureNotice", "dismissed");
+      closureNotice.classList.add("is-closing");
+      window.setTimeout(() => closureNotice.remove(), 220);
+    };
+
+    closureNotice.querySelector("[data-closure-close]")?.addEventListener("click", closeNotice);
+    closureNotice.addEventListener("click", (event) => {
+      if (event.target === closureNotice) closeNotice();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && document.body.contains(closureNotice)) closeNotice();
+    });
+  }
+
   const cookieBanner = document.querySelector("[data-cookie-banner]");
   const cookieAccept = document.querySelector("[data-cookie-accept]");
   if (cookieBanner) {

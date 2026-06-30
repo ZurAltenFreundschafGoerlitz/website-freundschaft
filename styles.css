@@ -1860,6 +1860,51 @@ dialog.lightbox::backdrop {
   color: var(--bites-accent-dark);
 }
 
+.closure-notice {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(7, 19, 22, 0.74);
+  backdrop-filter: blur(7px);
+}
+
+.closure-notice.is-closing {
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.closure-notice-card {
+  width: min(560px, 100%);
+  padding: clamp(28px, 5vw, 46px);
+  color: var(--bites-ink);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(247, 241, 231, 0.98)),
+    var(--bites-paper);
+  border: 1px solid rgba(127, 29, 36, 0.26);
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.38);
+}
+
+.closure-notice-card .script-title {
+  margin-bottom: 10px;
+  color: var(--bites-accent);
+}
+
+.closure-notice-card h2 {
+  margin: 0 0 16px;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  line-height: 0.98;
+  text-transform: uppercase;
+}
+
+.closure-notice-card p:not(.script-title) {
+  margin: 0 0 24px;
+  color: #4f5a5b;
+  font-size: 1.1rem;
+}
+
 .cookie-actions a:hover,
 .cookie-actions a:focus-visible,
 .cookie-actions button:hover,
