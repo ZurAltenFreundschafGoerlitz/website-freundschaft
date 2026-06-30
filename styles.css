@@ -1109,8 +1109,7 @@ dialog.lightbox::backdrop {
 }
 
 .bites-offers,
-.bites-contact,
-.bites-reviews {
+.bites-contact {
   background: #0b161a;
 }
 
@@ -1118,6 +1117,13 @@ dialog.lightbox::backdrop {
   background:
     linear-gradient(90deg, rgba(247, 241, 231, 0.96), rgba(251, 248, 241, 0.98)),
     url("assets/images/home-02.jpg") center / cover;
+  color: #2f3737;
+}
+
+.bites-reviews {
+  background:
+    linear-gradient(90deg, rgba(247, 241, 231, 0.97), rgba(251, 248, 241, 0.99)),
+    url("assets/images/restaurant-gastraum.jpg") center / cover;
   color: #2f3737;
 }
 
@@ -1277,8 +1283,28 @@ dialog.lightbox::backdrop {
   max-width: 520px;
 }
 
+.bites-review-intro h2 {
+  color: #0b161a;
+}
+
+.bites-review-intro p:not(.script-title) {
+  color: #4d5656;
+}
+
+.bites-review-intro .script-title {
+  color: var(--bites-accent);
+}
+
 .bites-review-intro .bites-button {
   margin-top: 22px;
+  color: var(--bites-accent);
+  border-color: var(--bites-accent);
+}
+
+.bites-review-intro .bites-button:hover,
+.bites-review-intro .bites-button:focus-visible {
+  color: #fff;
+  background: var(--bites-accent);
 }
 
 .bites-review-slider {
