@@ -289,4 +289,66 @@ document.addEventListener("DOMContentLoaded", () => {
     previous?.addEventListener("click", () => showSlide(index - 1));
     next?.addEventListener("click", () => showSlide(index + 1));
   });
+
+  document.querySelectorAll("[data-review-slider]").forEach((slider) => {
+    const slides = Array.from(slider.querySelectorAll("[data-review-slide]"));
+    const dots = Array.from(slider.querySelectorAll("[data-review-dot]"));
+    const previous = slider.querySelector("[data-review-prev]");
+    const next = slider.querySelector("[data-review-next]");
+    if (slides.length === 0) return;
+
+    let index = 0;
+    let timer = null;
+
+    const showReview = (nextIndex) => {
+      index = (nextIndex + slides.length) % slides.length;
+
+      slides.forEach((slide, slideIndex) => {
+        const isActive = slideIndex === index;
+        slide.classList.toggle("is-active", isActive);
+        slide.setAttribute("aria-hidden", isActive ? "false" : "true");
+      });
+
+      dots.forEach((dot, dotIndex) => {
+        dot.classList.toggle("is-active", dotIndex === index);
+      });
+    };
+
+    const stop = () => {
+      if (timer) {
+        window.clearInterval(timer);
+        timer = null;
+      }
+    };
+
+    const start = () => {
+      stop();
+      timer = window.setInterval(() => showReview(index + 1), 5200);
+    };
+
+    previous?.addEventListener("click", () => {
+      showReview(index - 1);
+      start();
+    });
+
+    next?.addEventListener("click", () => {
+      showReview(index + 1);
+      start();
+    });
+
+    dots.forEach((dot, dotIndex) => {
+      dot.addEventListener("click", () => {
+        showReview(dotIndex);
+        start();
+      });
+    });
+
+    slider.addEventListener("mouseenter", stop);
+    slider.addEventListener("mouseleave", start);
+    slider.addEventListener("focusin", stop);
+    slider.addEventListener("focusout", start);
+
+    showReview(0);
+    start();
+  });
 });
