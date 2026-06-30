@@ -1327,7 +1327,7 @@ dialog.lightbox::backdrop {
 
 .bites-review-track {
   position: relative;
-  min-height: 340px;
+  min-height: 390px;
   z-index: 1;
 }
 
@@ -1364,7 +1364,7 @@ dialog.lightbox::backdrop {
 .bites-review-card blockquote {
   margin: 0;
   color: #fff;
-  font-size: clamp(1.45rem, 3.2vw, 2.45rem);
+  font-size: clamp(1.35rem, 2.8vw, 2.18rem);
   font-weight: 700;
   line-height: 1.18;
 }
@@ -3398,7 +3398,7 @@ dialog.lightbox::backdrop {
   }
 
   .bites-review-track {
-    min-height: 300px;
+    min-height: 370px;
   }
 
   .bites-review-card {
@@ -3593,7 +3593,7 @@ dialog.lightbox::backdrop {
   }
 
   .bites-review-track {
-    min-height: 330px;
+    min-height: 370px;
   }
 
   .bites-review-card {
