@@ -2618,6 +2618,7 @@ dialog.lightbox::backdrop {
 
 .room-copy {
   position: relative;
+  min-width: 0;
   padding: 36px;
   background: rgba(20, 30, 33, 0.78);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -2635,9 +2636,10 @@ dialog.lightbox::backdrop {
 .room-copy h3 {
   margin: 0 0 14px;
   color: #fff;
-  font-size: clamp(1.85rem, 3.4vw, 3rem);
+  font-size: clamp(1.8rem, 2.85vw, 2.55rem);
   line-height: 1;
   text-transform: uppercase;
+  overflow-wrap: anywhere;
 }
 
 .room-copy p {
