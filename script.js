@@ -1,4 +1,40 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const vacationNoticeEnd = new Date("2026-08-05T06:00:00+02:00").getTime();
+  const vacationNoticeDismissed = window.sessionStorage.getItem("freundschaftVacationNotice") === "dismissed";
+  if (Date.now() < vacationNoticeEnd && !vacationNoticeDismissed) {
+    const vacationNotice = document.createElement("section");
+    vacationNotice.className = "vacation-notice";
+    vacationNotice.setAttribute("role", "dialog");
+    vacationNotice.setAttribute("aria-modal", "true");
+    vacationNotice.setAttribute("aria-labelledby", "vacation-notice-title");
+    vacationNotice.innerHTML = `
+      <div class="vacation-notice-card">
+        <p class="script-title">kurzer hinweis</p>
+        <h2 id="vacation-notice-title">Wir haben Urlaub</h2>
+        <p>Ab Mittwoch, dem 5. August, sind wir wieder zu unseren gewohnten Öffnungszeiten erreichbar. Zwischenzeitlich erreichen Sie uns gern per E-Mail an <a href="mailto:info@zur-alten-freundschaft.de">info@zur-alten-freundschaft.de</a>.</p>
+        <div class="vacation-notice-actions">
+          <a class="bites-button" href="mailto:info@zur-alten-freundschaft.de">E-Mail schreiben</a>
+          <button type="button" data-vacation-close>Verstanden</button>
+        </div>
+      </div>
+    `;
+    document.body.append(vacationNotice);
+
+    const closeVacationNotice = () => {
+      window.sessionStorage.setItem("freundschaftVacationNotice", "dismissed");
+      vacationNotice.classList.add("is-closing");
+      window.setTimeout(() => vacationNotice.remove(), 220);
+    };
+
+    vacationNotice.querySelector("[data-vacation-close]")?.addEventListener("click", closeVacationNotice);
+    vacationNotice.addEventListener("click", (event) => {
+      if (event.target === vacationNotice) closeVacationNotice();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && document.body.contains(vacationNotice)) closeVacationNotice();
+    });
+  }
+
   const cookieBanner = document.querySelector("[data-cookie-banner]");
   const cookieAccept = document.querySelector("[data-cookie-accept]");
   if (cookieBanner) {
