@@ -1473,6 +1473,18 @@ dialog.lightbox::backdrop {
   font-size: 1.65rem;
 }
 
+.action-current {
+  display: inline-block;
+  margin: 0 0 14px;
+  padding: 7px 12px 6px;
+  color: #1b1610;
+  background: var(--bites-accent-soft);
+  font-size: 0.72rem;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .bites-action-week h3 {
   margin: 0 0 12px;
   color: #fff;
