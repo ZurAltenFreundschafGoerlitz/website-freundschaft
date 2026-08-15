@@ -1,37 +1,40 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const vacationNoticeEnd = new Date("2026-08-05T06:00:00+02:00").getTime();
-  const vacationNoticeDismissed = window.sessionStorage.getItem("freundschaftVacationNotice") === "dismissed";
-  if (Date.now() < vacationNoticeEnd && !vacationNoticeDismissed) {
-    const vacationNotice = document.createElement("section");
-    vacationNotice.className = "vacation-notice";
-    vacationNotice.setAttribute("role", "dialog");
-    vacationNotice.setAttribute("aria-modal", "true");
-    vacationNotice.setAttribute("aria-labelledby", "vacation-notice-title");
-    vacationNotice.innerHTML = `
-      <div class="vacation-notice-card">
-        <p class="script-title">kurzer hinweis</p>
-        <h2 id="vacation-notice-title">Wir haben Urlaub</h2>
-        <p>Ab Mittwoch, dem 5. August, sind wir wieder zu unseren gewohnten Öffnungszeiten erreichbar. Zwischenzeitlich erreichen Sie uns gern per E-Mail an <a href="mailto:info@zur-alten-freundschaft.de">info@zur-alten-freundschaft.de</a>.</p>
-        <div class="vacation-notice-actions">
-          <a class="bites-button" href="mailto:info@zur-alten-freundschaft.de">E-Mail schreiben</a>
-          <button type="button" data-vacation-close>Verstanden</button>
+  const schoolNoticeEnd = new Date("2026-08-18T00:00:00+02:00").getTime();
+  const schoolNoticeDismissed = window.sessionStorage.getItem("freundschaftSchoolNotice2026") === "dismissed";
+  if (Date.now() < schoolNoticeEnd && !schoolNoticeDismissed) {
+    const schoolNotice = document.createElement("section");
+    schoolNotice.className = "site-notice school-notice";
+    schoolNotice.setAttribute("role", "dialog");
+    schoolNotice.setAttribute("aria-modal", "true");
+    schoolNotice.setAttribute("aria-labelledby", "school-notice-title");
+    schoolNotice.innerHTML = `
+      <div class="site-notice-card">
+        <img src="assets/images/schulanfang-hinweis.jpg" alt="Schultüte, Tafel und Stifte zum Schulanfang">
+        <div class="site-notice-copy">
+          <p class="script-title">schulanfang</p>
+          <h2 id="school-notice-title">Alles Gute zum Schulstart</h2>
+          <p>Wir wünschen allen Schulanfängern einen fröhlichen Start, viel Neugier und eine schöne erste Schulzeit.</p>
+          <div class="site-notice-actions">
+            <a class="bites-button" href="reservierung.html">Reservieren</a>
+            <button type="button" data-site-notice-close>Verstanden</button>
+          </div>
         </div>
       </div>
     `;
-    document.body.append(vacationNotice);
+    document.body.append(schoolNotice);
 
-    const closeVacationNotice = () => {
-      window.sessionStorage.setItem("freundschaftVacationNotice", "dismissed");
-      vacationNotice.classList.add("is-closing");
-      window.setTimeout(() => vacationNotice.remove(), 220);
+    const closeSchoolNotice = () => {
+      window.sessionStorage.setItem("freundschaftSchoolNotice2026", "dismissed");
+      schoolNotice.classList.add("is-closing");
+      window.setTimeout(() => schoolNotice.remove(), 220);
     };
 
-    vacationNotice.querySelector("[data-vacation-close]")?.addEventListener("click", closeVacationNotice);
-    vacationNotice.addEventListener("click", (event) => {
-      if (event.target === vacationNotice) closeVacationNotice();
+    schoolNotice.querySelector("[data-site-notice-close]")?.addEventListener("click", closeSchoolNotice);
+    schoolNotice.addEventListener("click", (event) => {
+      if (event.target === schoolNotice) closeSchoolNotice();
     });
     document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && document.body.contains(vacationNotice)) closeVacationNotice();
+      if (event.key === "Escape" && document.body.contains(schoolNotice)) closeSchoolNotice();
     });
   }
 

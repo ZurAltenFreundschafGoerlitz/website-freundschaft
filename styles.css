@@ -1872,7 +1872,7 @@ dialog.lightbox::backdrop {
   color: var(--bites-accent-dark);
 }
 
-.vacation-notice {
+.site-notice {
   position: fixed;
   inset: 0;
   z-index: 90;
@@ -1883,55 +1883,69 @@ dialog.lightbox::backdrop {
   backdrop-filter: blur(8px);
 }
 
-.vacation-notice.is-closing {
+.site-notice.is-closing {
   opacity: 0;
   transition: opacity 180ms ease;
 }
 
-.vacation-notice-card {
-  width: min(620px, 100%);
-  padding: clamp(28px, 5vw, 48px);
+.site-notice-card {
+  width: min(860px, 100%);
+  display: grid;
+  grid-template-columns: minmax(240px, 0.9fr) minmax(0, 1.1fr);
+  gap: 0;
   color: var(--bites-ink);
   background:
     linear-gradient(90deg, var(--bites-accent) 0 6px, transparent 6px),
     linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(247, 241, 231, 0.98));
   border: 1px solid rgba(127, 29, 36, 0.24);
   box-shadow: 0 28px 90px rgba(0, 0, 0, 0.38);
+  overflow: hidden;
 }
 
-.vacation-notice-card .script-title {
+.site-notice-card img {
+  width: 100%;
+  height: 100%;
+  min-height: 360px;
+  object-fit: cover;
+}
+
+.site-notice-copy {
+  padding: clamp(28px, 5vw, 48px);
+}
+
+.site-notice-card .script-title {
   margin-bottom: 10px;
   color: var(--bites-accent);
 }
 
-.vacation-notice-card h2 {
+.site-notice-card h2 {
   margin: 0 0 16px;
   font-size: clamp(2.15rem, 5vw, 3.5rem);
   line-height: 0.98;
   text-transform: uppercase;
 }
 
-.vacation-notice-card p:not(.script-title) {
+.site-notice-card p:not(.script-title) {
   margin: 0 0 24px;
   color: #4f5a5b;
   font-size: 1.1rem;
 }
 
-.vacation-notice-card a:not(.bites-button) {
+.site-notice-card a:not(.bites-button) {
   color: var(--bites-accent);
   font-weight: 800;
   text-decoration-thickness: 2px;
   text-underline-offset: 0.18em;
 }
 
-.vacation-notice-actions {
+.site-notice-actions {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
   align-items: center;
 }
 
-.vacation-notice-actions button {
+.site-notice-actions button {
   min-height: 54px;
   padding: 15px 22px;
   color: var(--bites-accent-dark);
@@ -1944,8 +1958,8 @@ dialog.lightbox::backdrop {
   cursor: pointer;
 }
 
-.vacation-notice-actions button:hover,
-.vacation-notice-actions button:focus-visible {
+.site-notice-actions button:hover,
+.site-notice-actions button:focus-visible {
   outline: none;
   border-color: var(--bites-accent);
 }
@@ -3735,16 +3749,27 @@ dialog.lightbox::backdrop {
     flex: 1 1 auto;
   }
 
-  .vacation-notice {
+  .site-notice {
     padding: 16px;
   }
 
-  .vacation-notice-actions {
+  .site-notice-card {
+    grid-template-columns: 1fr;
+    max-height: calc(100vh - 32px);
+    overflow-y: auto;
+  }
+
+  .site-notice-card img {
+    min-height: 210px;
+    max-height: 32vh;
+  }
+
+  .site-notice-actions {
     align-items: stretch;
   }
 
-  .vacation-notice-actions .bites-button,
-  .vacation-notice-actions button {
+  .site-notice-actions .bites-button,
+  .site-notice-actions button {
     flex: 1 1 100%;
   }
 
