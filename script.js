@@ -1,7 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   const schoolNoticeEnd = new Date("2026-08-18T00:00:00+02:00").getTime();
+  const schoolNoticeSoldOutEnd = new Date("2026-08-16T00:00:00+02:00").getTime();
   const schoolNoticeDismissed = window.sessionStorage.getItem("freundschaftSchoolNotice2026") === "dismissed";
   if (Date.now() < schoolNoticeEnd && !schoolNoticeDismissed) {
+    const schoolNoticePrimaryLabel = Date.now() < schoolNoticeSoldOutEnd ? "Heute ausgebucht" : "Weiter zur Webseite";
     const schoolNotice = document.createElement("section");
     schoolNotice.className = "site-notice school-notice";
     schoolNotice.setAttribute("role", "dialog");
@@ -15,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <h2 id="school-notice-title">Alles Gute zum Schulstart</h2>
           <p>Wir wünschen allen Schulanfängern einen fröhlichen Start, viel Neugier und eine schöne erste Schulzeit.</p>
           <div class="site-notice-actions">
-            <a class="bites-button" href="reservierung.html">Reservieren</a>
+            <button class="bites-button" type="button" data-site-notice-primary>${schoolNoticePrimaryLabel}</button>
             <button type="button" data-site-notice-close>Verstanden</button>
           </div>
         </div>
@@ -29,7 +31,9 @@ document.addEventListener("DOMContentLoaded", () => {
       window.setTimeout(() => schoolNotice.remove(), 220);
     };
 
-    schoolNotice.querySelector("[data-site-notice-close]")?.addEventListener("click", closeSchoolNotice);
+    schoolNotice.querySelectorAll("[data-site-notice-close], [data-site-notice-primary]").forEach((button) => {
+      button.addEventListener("click", closeSchoolNotice);
+    });
     schoolNotice.addEventListener("click", (event) => {
       if (event.target === schoolNotice) closeSchoolNotice();
     });
