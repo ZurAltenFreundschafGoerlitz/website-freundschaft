@@ -1813,33 +1813,60 @@ dialog.lightbox::backdrop {
   bottom: 24px;
   z-index: 40;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 22px;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 18px;
   align-items: center;
-  padding: 20px 22px;
+  padding: 22px 24px;
   color: #fff;
-  background: linear-gradient(90deg, rgba(127, 29, 36, 0.88), rgba(168, 41, 47, 0.78));
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 0 18px 52px rgba(0, 0, 0, 0.28);
-  backdrop-filter: blur(10px);
+  background:
+    radial-gradient(circle at 12% 18%, rgba(227, 191, 111, 0.24), transparent 28%),
+    linear-gradient(115deg, rgba(127, 29, 36, 0.9), rgba(84, 20, 26, 0.86));
+  border: 1px solid rgba(227, 191, 111, 0.38);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.36);
+  backdrop-filter: blur(12px);
 }
 
 .cookie-banner.is-hidden {
   display: none;
 }
 
+.cookie-cookie {
+  width: 62px;
+  height: 62px;
+  display: grid;
+  place-items: center;
+  color: transparent;
+  background:
+    radial-gradient(circle at 25% 28%, #442017 0 4px, transparent 5px),
+    radial-gradient(circle at 60% 30%, #442017 0 3px, transparent 4px),
+    radial-gradient(circle at 45% 64%, #442017 0 4px, transparent 5px),
+    radial-gradient(circle at 72% 66%, #442017 0 3px, transparent 4px),
+    radial-gradient(circle at 50% 50%, #d6a54a 0 32px, transparent 33px);
+  border-radius: 50%;
+  box-shadow: inset -9px -12px 0 rgba(107, 58, 23, 0.2), 0 8px 26px rgba(0, 0, 0, 0.22);
+}
+
 .cookie-banner strong {
   display: block;
   margin-bottom: 4px;
   font-family: "Josefin Sans", Nunito, Arial, Helvetica, sans-serif;
-  font-size: 1.05rem;
+  font-size: clamp(1.2rem, 2vw, 1.65rem);
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.02em;
 }
 
 .cookie-banner p {
   margin: 0;
   color: rgba(255, 255, 255, 0.84);
+  font-size: 1rem;
+}
+
+.cookie-banner p a {
+  color: #fff;
+  font-weight: 800;
+  text-decoration-color: var(--bites-gold);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.18em;
 }
 
 .cookie-actions {
@@ -1862,14 +1889,16 @@ dialog.lightbox::backdrop {
   letter-spacing: 0.05em;
   text-transform: uppercase;
   text-decoration: none;
-  background: rgba(11, 22, 26, 0.22);
-  border: 1px solid rgba(255, 255, 255, 0.38);
+  background: rgba(11, 22, 26, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.36);
   cursor: pointer;
 }
 
-.cookie-actions button {
-  background: #fff;
-  color: var(--bites-accent-dark);
+.cookie-actions button[data-cookie-accept] {
+  color: var(--bites-ink);
+  background: var(--bites-gold);
+  border-color: var(--bites-gold);
+  box-shadow: 0 10px 30px rgba(227, 191, 111, 0.24);
 }
 
 .site-notice {
@@ -3738,6 +3767,11 @@ dialog.lightbox::backdrop {
     bottom: 12px;
     grid-template-columns: 1fr;
     padding: 18px;
+    text-align: center;
+  }
+
+  .cookie-cookie {
+    justify-self: center;
   }
 
   .cookie-actions {
@@ -3746,7 +3780,7 @@ dialog.lightbox::backdrop {
 
   .cookie-actions a,
   .cookie-actions button {
-    flex: 1 1 auto;
+    flex: 1 1 100%;
   }
 
   .site-notice {

@@ -44,14 +44,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const cookieBanner = document.querySelector("[data-cookie-banner]");
   const cookieAccept = document.querySelector("[data-cookie-accept]");
+  const cookieDecline = document.querySelector("[data-cookie-decline]");
   if (cookieBanner) {
     const accepted = window.localStorage.getItem("freundschaftCookieNotice") === "accepted";
     cookieBanner.classList.toggle("is-hidden", accepted);
 
-    cookieAccept?.addEventListener("click", () => {
+    const closeCookieBanner = () => {
       window.localStorage.setItem("freundschaftCookieNotice", "accepted");
       cookieBanner.classList.add("is-hidden");
-    });
+    };
+
+    cookieAccept?.addEventListener("click", closeCookieBanner);
+    cookieDecline?.addEventListener("click", closeCookieBanner);
   }
 
   document.querySelectorAll(".bites-header").forEach((header) => {
