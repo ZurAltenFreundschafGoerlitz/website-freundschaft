@@ -1859,37 +1859,41 @@ dialog.lightbox::backdrop {
 }
 
 .cookie-cookie {
-  width: 62px;
-  height: 62px;
+  width: 74px;
+  height: 56px;
   position: relative;
   display: grid;
   place-items: center;
   color: transparent;
   background:
-    radial-gradient(circle at 20% 32%, #4a2217 0 4px, transparent 5px),
-    radial-gradient(circle at 46% 20%, #6b351e 0 2px, transparent 3px),
-    radial-gradient(circle at 64% 34%, #4a2217 0 4px, transparent 5px),
-    radial-gradient(circle at 34% 68%, #4a2217 0 4px, transparent 5px),
-    radial-gradient(circle at 72% 72%, #6b351e 0 3px, transparent 4px),
-    radial-gradient(circle at 48% 52%, #ddb15a 0 30px, transparent 31px);
-  border-radius: 54% 46% 50% 48% / 47% 53% 45% 55%;
-  box-shadow: inset -8px -10px 0 rgba(107, 58, 23, 0.18), inset 4px 5px 0 rgba(255, 236, 170, 0.22), 0 8px 22px rgba(0, 0, 0, 0.2);
-  transform: rotate(-8deg);
-  --cookie-bite-bg: #732128;
+    radial-gradient(ellipse at 20% 42%, #4a2217 0 4px, transparent 5px),
+    radial-gradient(ellipse at 42% 28%, #6b351e 0 3px, transparent 4px),
+    radial-gradient(ellipse at 66% 44%, #4a2217 0 4px, transparent 5px),
+    radial-gradient(ellipse at 48% 68%, #6b351e 0 3px, transparent 4px),
+    linear-gradient(180deg, #e4bd68 0%, #c88a38 100%);
+  border-radius: 50% / 42%;
+  box-shadow:
+    0 8px 0 #b87432,
+    0 16px 0 #865026,
+    inset -8px -8px 0 rgba(107, 58, 23, 0.16),
+    inset 5px 4px 0 rgba(255, 236, 170, 0.18),
+    0 16px 24px rgba(0, 0, 0, 0.22);
+  transform: rotate(-7deg);
 }
 
 .cookie-cookie::before {
   content: "";
   position: absolute;
-  right: -3px;
-  top: -4px;
-  width: 22px;
-  height: 22px;
-  background: var(--cookie-bite-bg);
-  border-radius: 50%;
-  box-shadow:
-    -9px 4px 0 -5px var(--cookie-bite-bg),
-    -3px 15px 0 -5px var(--cookie-bite-bg);
+  left: 8px;
+  right: 9px;
+  bottom: -17px;
+  height: 18px;
+  background:
+    radial-gradient(circle at 24% 48%, #4a2217 0 2px, transparent 3px),
+    radial-gradient(circle at 61% 42%, #6b351e 0 1.8px, transparent 2.8px),
+    linear-gradient(180deg, #a7662f 0%, #7c4724 100%);
+  border-radius: 50% / 55%;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   pointer-events: none;
 }
 
@@ -1921,15 +1925,21 @@ dialog.lightbox::backdrop {
     radial-gradient(circle at 34% 68%, #4a2217 0 2px, transparent 3px),
     radial-gradient(circle at 72% 72%, #6b351e 0 1.5px, transparent 2.5px),
     radial-gradient(circle at 48% 52%, #ddb15a 0 14px, transparent 15px);
+  border-radius: 54% 46% 50% 48% / 47% 53% 45% 55%;
   box-shadow: inset -4px -5px 0 rgba(107, 58, 23, 0.18), 0 5px 12px rgba(0, 0, 0, 0.2);
+  transform: rotate(-8deg);
   --cookie-bite-bg: #141e21;
 }
 
 .cookie-cookie.mini::before {
+  left: auto;
+  bottom: auto;
   right: -2px;
   top: -2px;
   width: 10px;
   height: 10px;
+  background: var(--cookie-bite-bg);
+  border-radius: 50%;
   box-shadow:
     -4px 2px 0 -2px var(--cookie-bite-bg),
     -1px 7px 0 -2px var(--cookie-bite-bg);
