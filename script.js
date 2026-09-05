@@ -45,6 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const cookieBanner = document.querySelector("[data-cookie-banner]");
   const cookieAccept = document.querySelector("[data-cookie-accept]");
   const cookieDecline = document.querySelector("[data-cookie-decline]");
+  const cookieOpenButtons = document.querySelectorAll("[data-cookie-open]");
   if (cookieBanner) {
     const accepted = window.localStorage.getItem("freundschaftCookieNotice") === "accepted";
     cookieBanner.classList.toggle("is-hidden", accepted);
@@ -56,6 +57,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     cookieAccept?.addEventListener("click", closeCookieBanner);
     cookieDecline?.addEventListener("click", closeCookieBanner);
+    cookieOpenButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        window.localStorage.removeItem("freundschaftCookieNotice");
+        cookieBanner.classList.remove("is-hidden");
+        cookieAccept?.focus();
+      });
+    });
   }
 
   document.querySelectorAll(".bites-header").forEach((header) => {

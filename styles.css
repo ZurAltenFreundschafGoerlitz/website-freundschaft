@@ -1806,6 +1806,34 @@ dialog.lightbox::backdrop {
   background: #141e21;
 }
 
+.footer-cookie-button {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  padding: 8px 14px 8px 10px;
+  color: rgba(255, 255, 255, 0.88);
+  font-family: "Josefin Sans", Nunito, Arial, Helvetica, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(227, 191, 111, 0.34);
+  cursor: pointer;
+  transition: color 160ms ease, border-color 160ms ease, background 160ms ease, transform 160ms ease;
+}
+
+.footer-cookie-button:hover,
+.footer-cookie-button:focus-visible {
+  color: #fff;
+  background: rgba(127, 29, 36, 0.42);
+  border-color: rgba(227, 191, 111, 0.72);
+  outline: none;
+  transform: translateY(-1px);
+}
+
 .cookie-banner {
   position: fixed;
   left: 24px;
@@ -1844,6 +1872,19 @@ dialog.lightbox::backdrop {
     radial-gradient(circle at 50% 50%, #d6a54a 0 32px, transparent 33px);
   border-radius: 50%;
   box-shadow: inset -9px -12px 0 rgba(107, 58, 23, 0.2), 0 8px 26px rgba(0, 0, 0, 0.22);
+}
+
+.cookie-cookie.mini {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  background:
+    radial-gradient(circle at 25% 28%, #442017 0 2px, transparent 3px),
+    radial-gradient(circle at 60% 30%, #442017 0 1.5px, transparent 2.5px),
+    radial-gradient(circle at 45% 64%, #442017 0 2px, transparent 3px),
+    radial-gradient(circle at 72% 66%, #442017 0 1.5px, transparent 2.5px),
+    radial-gradient(circle at 50% 50%, #d6a54a 0 14px, transparent 15px);
+  box-shadow: inset -4px -5px 0 rgba(107, 58, 23, 0.2), 0 5px 14px rgba(0, 0, 0, 0.24);
 }
 
 .cookie-banner strong {
