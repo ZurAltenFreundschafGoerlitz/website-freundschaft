@@ -1861,17 +1861,46 @@ dialog.lightbox::backdrop {
 .cookie-cookie {
   width: 62px;
   height: 62px;
+  position: relative;
   display: grid;
   place-items: center;
   color: transparent;
   background:
-    radial-gradient(circle at 25% 28%, #442017 0 4px, transparent 5px),
-    radial-gradient(circle at 60% 30%, #442017 0 3px, transparent 4px),
-    radial-gradient(circle at 45% 64%, #442017 0 4px, transparent 5px),
-    radial-gradient(circle at 72% 66%, #442017 0 3px, transparent 4px),
-    radial-gradient(circle at 50% 50%, #d6a54a 0 32px, transparent 33px);
+    radial-gradient(circle at 28% 30%, #4a2217 0 4px, transparent 5px),
+    radial-gradient(circle at 57% 24%, #4a2217 0 3px, transparent 4px),
+    radial-gradient(circle at 37% 67%, #4a2217 0 4px, transparent 5px),
+    radial-gradient(circle at 69% 62%, #4a2217 0 3px, transparent 4px),
+    radial-gradient(circle at 50% 50%, #d8a74f 0 31px, transparent 32px);
   border-radius: 50%;
-  box-shadow: inset -9px -12px 0 rgba(107, 58, 23, 0.2), 0 8px 26px rgba(0, 0, 0, 0.22);
+  box-shadow: inset -9px -12px 0 rgba(107, 58, 23, 0.2), inset 3px 4px 0 rgba(255, 236, 170, 0.22), 0 8px 26px rgba(0, 0, 0, 0.22);
+}
+
+.cookie-cookie::before {
+  content: "";
+  position: absolute;
+  right: -7px;
+  top: 4px;
+  width: 28px;
+  height: 30px;
+  background:
+    radial-gradient(circle at 80% 20%, rgba(127, 29, 36, 0.92) 0 8px, transparent 9px),
+    radial-gradient(circle at 44% 10%, rgba(127, 29, 36, 0.92) 0 8px, transparent 9px),
+    radial-gradient(circle at 56% 55%, rgba(127, 29, 36, 0.92) 0 9px, transparent 10px);
+}
+
+.cookie-cookie::after {
+  content: "";
+  position: absolute;
+  right: -12px;
+  top: -5px;
+  width: 18px;
+  height: 22px;
+  background:
+    radial-gradient(circle at 20% 80%, #d8a74f 0 2px, transparent 3px),
+    radial-gradient(circle at 70% 48%, #b77735 0 2px, transparent 3px),
+    radial-gradient(circle at 45% 16%, #4a2217 0 1.5px, transparent 2.5px);
+  transform: rotate(8deg);
+  pointer-events: none;
 }
 
 .cookie-cookie.mini {
@@ -1879,12 +1908,34 @@ dialog.lightbox::backdrop {
   height: 28px;
   flex: 0 0 28px;
   background:
-    radial-gradient(circle at 25% 28%, #442017 0 2px, transparent 3px),
-    radial-gradient(circle at 60% 30%, #442017 0 1.5px, transparent 2.5px),
-    radial-gradient(circle at 45% 64%, #442017 0 2px, transparent 3px),
-    radial-gradient(circle at 72% 66%, #442017 0 1.5px, transparent 2.5px),
-    radial-gradient(circle at 50% 50%, #d6a54a 0 14px, transparent 15px);
+    radial-gradient(circle at 28% 30%, #4a2217 0 2px, transparent 3px),
+    radial-gradient(circle at 57% 24%, #4a2217 0 1.5px, transparent 2.5px),
+    radial-gradient(circle at 37% 67%, #4a2217 0 2px, transparent 3px),
+    radial-gradient(circle at 69% 62%, #4a2217 0 1.5px, transparent 2.5px),
+    radial-gradient(circle at 50% 50%, #d8a74f 0 14px, transparent 15px);
   box-shadow: inset -4px -5px 0 rgba(107, 58, 23, 0.2), 0 5px 14px rgba(0, 0, 0, 0.24);
+}
+
+.cookie-cookie.mini::before {
+  right: -3px;
+  top: 2px;
+  width: 13px;
+  height: 14px;
+  background:
+    radial-gradient(circle at 80% 20%, #141e21 0 4px, transparent 5px),
+    radial-gradient(circle at 44% 10%, #141e21 0 4px, transparent 5px),
+    radial-gradient(circle at 56% 55%, #141e21 0 4px, transparent 5px);
+}
+
+.cookie-cookie.mini::after {
+  right: -7px;
+  top: -3px;
+  width: 10px;
+  height: 12px;
+  background:
+    radial-gradient(circle at 20% 80%, #d8a74f 0 1.2px, transparent 2px),
+    radial-gradient(circle at 70% 48%, #b77735 0 1.2px, transparent 2px),
+    radial-gradient(circle at 45% 16%, #4a2217 0 1px, transparent 1.8px);
 }
 
 .cookie-banner strong {
