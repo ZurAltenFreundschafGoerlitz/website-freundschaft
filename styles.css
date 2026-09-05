@@ -686,6 +686,7 @@ select:focus {
 }
 
 .page-footer {
+  position: relative;
   padding: 48px 16px 36px;
   background: var(--coal-dark);
   color: rgba(255, 255, 255, 0.86);
@@ -713,6 +714,8 @@ select:focus {
 .footer-logo {
   width: min(260px, 72vw);
   margin: 26px auto 0;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .source-note {
@@ -1807,31 +1810,28 @@ dialog.lightbox::backdrop {
 }
 
 .footer-cookie-button {
-  min-height: 42px;
+  width: 34px;
+  height: 34px;
+  min-height: 34px;
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  margin-top: 18px;
-  padding: 8px 14px 8px 10px;
-  color: rgba(255, 255, 255, 0.88);
-  font-family: "Josefin Sans", Nunito, Arial, Helvetica, sans-serif;
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(227, 191, 111, 0.34);
+  justify-content: center;
+  margin: 26px 0 0 12px;
+  padding: 0;
+  font-size: 0;
+  vertical-align: middle;
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
   cursor: pointer;
-  transition: color 160ms ease, border-color 160ms ease, background 160ms ease, transform 160ms ease;
+  transition: filter 160ms ease, transform 160ms ease;
 }
 
 .footer-cookie-button:hover,
 .footer-cookie-button:focus-visible {
-  color: #fff;
-  background: rgba(127, 29, 36, 0.42);
-  border-color: rgba(227, 191, 111, 0.72);
   outline: none;
-  transform: translateY(-1px);
+  filter: drop-shadow(0 0 10px rgba(227, 191, 111, 0.48));
+  transform: translateY(-1px) rotate(-3deg);
 }
 
 .cookie-banner {
@@ -1866,40 +1866,47 @@ dialog.lightbox::backdrop {
   place-items: center;
   color: transparent;
   background:
-    radial-gradient(circle at 28% 30%, #4a2217 0 4px, transparent 5px),
-    radial-gradient(circle at 57% 24%, #4a2217 0 3px, transparent 4px),
-    radial-gradient(circle at 37% 67%, #4a2217 0 4px, transparent 5px),
-    radial-gradient(circle at 69% 62%, #4a2217 0 3px, transparent 4px),
-    radial-gradient(circle at 50% 50%, #d8a74f 0 31px, transparent 32px);
-  border-radius: 50%;
-  box-shadow: inset -9px -12px 0 rgba(107, 58, 23, 0.2), inset 3px 4px 0 rgba(255, 236, 170, 0.22), 0 8px 26px rgba(0, 0, 0, 0.22);
+    radial-gradient(circle at 20% 32%, #4a2217 0 4px, transparent 5px),
+    radial-gradient(circle at 46% 20%, #6b351e 0 2px, transparent 3px),
+    radial-gradient(circle at 64% 34%, #4a2217 0 4px, transparent 5px),
+    radial-gradient(circle at 34% 68%, #4a2217 0 4px, transparent 5px),
+    radial-gradient(circle at 72% 72%, #6b351e 0 3px, transparent 4px),
+    radial-gradient(circle at 48% 52%, #ddb15a 0 30px, transparent 31px);
+  border-radius: 54% 46% 50% 48% / 47% 53% 45% 55%;
+  box-shadow: inset -8px -10px 0 rgba(107, 58, 23, 0.18), inset 4px 5px 0 rgba(255, 236, 170, 0.22), 0 8px 22px rgba(0, 0, 0, 0.2);
+  transform: rotate(-8deg);
+  --cookie-bite-bg: #732128;
 }
 
 .cookie-cookie::before {
   content: "";
   position: absolute;
-  right: -7px;
-  top: 4px;
-  width: 28px;
-  height: 30px;
-  background:
-    radial-gradient(circle at 80% 20%, rgba(127, 29, 36, 0.92) 0 8px, transparent 9px),
-    radial-gradient(circle at 44% 10%, rgba(127, 29, 36, 0.92) 0 8px, transparent 9px),
-    radial-gradient(circle at 56% 55%, rgba(127, 29, 36, 0.92) 0 9px, transparent 10px);
+  right: -3px;
+  top: -4px;
+  width: 22px;
+  height: 22px;
+  background: var(--cookie-bite-bg);
+  border-radius: 50%;
+  box-shadow:
+    -9px 4px 0 -5px var(--cookie-bite-bg),
+    -3px 15px 0 -5px var(--cookie-bite-bg);
+  pointer-events: none;
 }
 
 .cookie-cookie::after {
   content: "";
   position: absolute;
-  right: -12px;
-  top: -5px;
-  width: 18px;
-  height: 22px;
+  right: -16px;
+  top: -8px;
+  width: 24px;
+  height: 26px;
   background:
-    radial-gradient(circle at 20% 80%, #d8a74f 0 2px, transparent 3px),
-    radial-gradient(circle at 70% 48%, #b77735 0 2px, transparent 3px),
-    radial-gradient(circle at 45% 16%, #4a2217 0 1.5px, transparent 2.5px);
-  transform: rotate(8deg);
+    radial-gradient(circle at 18% 78%, #ddb15a 0 2px, transparent 3px),
+    radial-gradient(circle at 50% 55%, #b77735 0 2px, transparent 3px),
+    radial-gradient(circle at 76% 28%, #ddb15a 0 1.8px, transparent 2.8px),
+    radial-gradient(circle at 42% 14%, #4a2217 0 1.5px, transparent 2.5px),
+    radial-gradient(circle at 88% 70%, #6b351e 0 1.4px, transparent 2.4px);
+  transform: rotate(18deg);
   pointer-events: none;
 }
 
@@ -1908,34 +1915,36 @@ dialog.lightbox::backdrop {
   height: 28px;
   flex: 0 0 28px;
   background:
-    radial-gradient(circle at 28% 30%, #4a2217 0 2px, transparent 3px),
-    radial-gradient(circle at 57% 24%, #4a2217 0 1.5px, transparent 2.5px),
-    radial-gradient(circle at 37% 67%, #4a2217 0 2px, transparent 3px),
-    radial-gradient(circle at 69% 62%, #4a2217 0 1.5px, transparent 2.5px),
-    radial-gradient(circle at 50% 50%, #d8a74f 0 14px, transparent 15px);
-  box-shadow: inset -4px -5px 0 rgba(107, 58, 23, 0.2), 0 5px 14px rgba(0, 0, 0, 0.24);
+    radial-gradient(circle at 20% 32%, #4a2217 0 2px, transparent 3px),
+    radial-gradient(circle at 46% 20%, #6b351e 0 1.2px, transparent 2px),
+    radial-gradient(circle at 64% 34%, #4a2217 0 2px, transparent 3px),
+    radial-gradient(circle at 34% 68%, #4a2217 0 2px, transparent 3px),
+    radial-gradient(circle at 72% 72%, #6b351e 0 1.5px, transparent 2.5px),
+    radial-gradient(circle at 48% 52%, #ddb15a 0 14px, transparent 15px);
+  box-shadow: inset -4px -5px 0 rgba(107, 58, 23, 0.18), 0 5px 12px rgba(0, 0, 0, 0.2);
+  --cookie-bite-bg: #141e21;
 }
 
 .cookie-cookie.mini::before {
-  right: -3px;
-  top: 2px;
-  width: 13px;
-  height: 14px;
-  background:
-    radial-gradient(circle at 80% 20%, #141e21 0 4px, transparent 5px),
-    radial-gradient(circle at 44% 10%, #141e21 0 4px, transparent 5px),
-    radial-gradient(circle at 56% 55%, #141e21 0 4px, transparent 5px);
+  right: -2px;
+  top: -2px;
+  width: 10px;
+  height: 10px;
+  box-shadow:
+    -4px 2px 0 -2px var(--cookie-bite-bg),
+    -1px 7px 0 -2px var(--cookie-bite-bg);
 }
 
 .cookie-cookie.mini::after {
-  right: -7px;
-  top: -3px;
-  width: 10px;
-  height: 12px;
+  right: -9px;
+  top: -5px;
+  width: 13px;
+  height: 14px;
   background:
-    radial-gradient(circle at 20% 80%, #d8a74f 0 1.2px, transparent 2px),
-    radial-gradient(circle at 70% 48%, #b77735 0 1.2px, transparent 2px),
-    radial-gradient(circle at 45% 16%, #4a2217 0 1px, transparent 1.8px);
+    radial-gradient(circle at 18% 78%, #ddb15a 0 1.2px, transparent 2px),
+    radial-gradient(circle at 50% 55%, #b77735 0 1.2px, transparent 2px),
+    radial-gradient(circle at 76% 28%, #ddb15a 0 1px, transparent 1.8px),
+    radial-gradient(circle at 42% 14%, #4a2217 0 1px, transparent 1.8px);
 }
 
 .cookie-banner strong {
