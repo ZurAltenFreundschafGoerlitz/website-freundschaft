@@ -141,16 +141,74 @@ document.addEventListener("DOMContentLoaded", () => {
     if (isShortNoticeBooking(bookingDate.value, time)) destination.searchParams.set("kurzfristig", "1");
     next.value = destination.href;
   });
-  const openDatePicker = () => {
-    if (typeof bookingDate?.showPicker !== "function") return;
-    try {
-      bookingDate.showPicker();
-    } catch (_error) {
-      // Some browsers only allow the picker from a direct user interaction.
-    }
-  };
-  bookingDate?.addEventListener("click", openDatePicker);
-  bookingDate?.addEventListener("focus", openDatePicker);
+  if (bookingDate) {
+    // Keep the ISO date for submission and the 24-hour notice; use an independent UI.
+    bookingDate.type = "hidden";
+    const textDate = document.createElement("input");
+    textDate.id = "booking-date-text";
+    textDate.type = "text";
+    textDate.placeholder = "TT.MM.JJJJ";
+    textDate.autocomplete = "off";
+    bookingDate.before(textDate);
+    document.querySelector('label[for="booking-date"]').htmlFor = textDate.id;
+    const picker = document.createElement("details");
+    picker.className = "booking-calendar";
+    picker.innerHTML = `<summary>Datum im Kalender auswählen</summary>
+      <div class="calendar-header"><button type="button" aria-label="Vorheriger Monat">‹</button>
+      <strong aria-live="polite"></strong><button type="button" aria-label="Nächster Monat">›</button></div>
+      <div class="calendar-days"></div>`;
+    bookingDate.after(picker);
+    const grid = picker.querySelector(".calendar-days");
+    const monthLabel = picker.querySelector("strong");
+    const today = new Date();
+    let month = new Date(today.getFullYear(), today.getMonth(), 1);
+    const iso = date => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+    const display = value => value ? value.split("-").reverse().join(".") : "";
+    const render = () => {
+      monthLabel.textContent = month.toLocaleDateString("de-DE", { month: "long", year: "numeric" });
+      grid.replaceChildren();
+      ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"].forEach(day => {
+        const label = document.createElement("span"); label.textContent = day; grid.append(label);
+      });
+      const offset = (month.getDay() + 6) % 7;
+      for (let i = 0; i < offset; i++) grid.append(document.createElement("span"));
+      const days = new Date(month.getFullYear(), month.getMonth() + 1, 0).getDate();
+      for (let day = 1; day <= days; day++) {
+        const date = new Date(month.getFullYear(), month.getMonth(), day);
+        const value = iso(date);
+        const button = document.createElement("button");
+        button.type = "button"; button.textContent = day;
+        button.setAttribute("aria-label", date.toLocaleDateString("de-DE", { day: "numeric", month: "long", year: "numeric" }));
+        button.setAttribute("aria-pressed", String(value === bookingDate.value));
+        button.addEventListener("click", () => {
+          bookingDate.value = value; textDate.value = display(value);
+          textDate.setCustomValidity(""); picker.open = false; textDate.focus(); render();
+        });
+        grid.append(button);
+      }
+    };
+    const syncText = () => {
+      const match = textDate.value.trim().match(/^(\d{1,2})\.(\d{1,2})\.(\d{4})$/);
+      const date = match ? new Date(Number(match[3]), Number(match[2]) - 1, Number(match[1])) : null;
+      const valid = date && date.getFullYear() === Number(match[3]) && date.getMonth() === Number(match[2]) - 1 && date.getDate() === Number(match[1]);
+      bookingDate.value = valid ? iso(date) : "";
+      textDate.setCustomValidity(textDate.value.trim() && !valid ? "Bitte ein gültiges Datum als TT.MM.JJJJ eingeben." : "");
+      if (valid) month = new Date(date.getFullYear(), date.getMonth(), 1);
+      render();
+    };
+    textDate.value = display(bookingDate.value);
+    textDate.addEventListener("input", syncText);
+    picker.querySelector('[aria-label="Vorheriger Monat"]').addEventListener("click", () => {
+      month.setMonth(month.getMonth() - 1); render();
+    });
+    picker.querySelector('[aria-label="Nächster Monat"]').addEventListener("click", () => {
+      month.setMonth(month.getMonth() + 1); render();
+    });
+    picker.addEventListener("keydown", event => {
+      if (event.key === "Escape") { picker.open = false; picker.querySelector("summary").focus(); }
+    });
+    render();
+  }
 
   document.querySelectorAll("form[data-local-form]").forEach((form) => {
     form.addEventListener("submit", (event) => {

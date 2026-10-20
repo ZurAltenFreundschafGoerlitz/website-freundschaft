@@ -1684,6 +1684,7 @@ dialog.lightbox::backdrop {
 }
 
 .bites-form-row {
+  align-content: start;
   display: grid;
   gap: 8px;
 }
@@ -4071,3 +4072,14 @@ dialog.lightbox::backdrop {
 }
 .email-notice button:hover { background: #60151b; }
 .email-notice :focus-visible { outline: 3px solid #26383a; outline-offset: 4px; }
+
+/* Browser-independent reservation date selector. */
+.booking-calendar { margin-top: 8px; color: #fff; }
+.booking-calendar summary { cursor: pointer; color: var(--bites-accent-soft); padding: 8px 0; }
+.calendar-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 10px 0; }
+.calendar-days { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 3px; }
+.calendar-days span { text-align: center; font-size: 0.8rem; padding: 5px 0; }
+.booking-calendar button { min-height: 38px; padding: 4px; border: 1px solid #526064; background: #0b161a; color: #fff; font: inherit; cursor: pointer; }
+.calendar-header button { width: 38px; }
+.booking-calendar button:hover, .booking-calendar button[aria-pressed="true"] { background: #d7b36a; color: #0b161a; }
+.booking-calendar button:focus-visible, .booking-calendar summary:focus-visible { outline: 2px solid #d7b36a; outline-offset: 2px; }
