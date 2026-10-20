@@ -151,9 +151,19 @@ document.addEventListener("DOMContentLoaded", () => {
     textDate.autocomplete = "off";
     bookingDate.before(textDate);
     document.querySelector('label[for="booking-date"]').htmlFor = textDate.id;
-    const picker = document.createElement("details");
+    const picker = document.createElement("div");
     picker.className = "booking-calendar";
-    picker.innerHTML = `<summary>Datum im Kalender auswählen</summary>
+    picker.id = "booking-calendar";
+    picker.hidden = true;
+    picker.setAttribute("role", "group");
+    picker.setAttribute("aria-label", "Datum auswählen");
+    textDate.setAttribute("aria-controls", picker.id);
+    textDate.setAttribute("aria-expanded", "false");
+    const openCalendar = () => { picker.hidden = false; textDate.setAttribute("aria-expanded", "true"); };
+    const closeCalendar = () => { picker.hidden = true; textDate.setAttribute("aria-expanded", "false"); };
+    textDate.addEventListener("click", openCalendar);
+    textDate.addEventListener("focus", openCalendar);
+    picker.innerHTML = `
       <div class="calendar-header"><button type="button" aria-label="Vorheriger Monat">‹</button>
       <strong aria-live="polite"></strong><button type="button" aria-label="Nächster Monat">›</button></div>
       <div class="calendar-days"></div>`;
@@ -182,7 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
         button.setAttribute("aria-pressed", String(value === bookingDate.value));
         button.addEventListener("click", () => {
           bookingDate.value = value; textDate.value = display(value);
-          textDate.setCustomValidity(""); picker.open = false; textDate.focus(); render();
+          textDate.setCustomValidity(""); textDate.focus(); closeCalendar(); render();
         });
         grid.append(button);
       }
@@ -204,8 +214,19 @@ document.addEventListener("DOMContentLoaded", () => {
     picker.querySelector('[aria-label="Nächster Monat"]').addEventListener("click", () => {
       month.setMonth(month.getMonth() + 1); render();
     });
-    picker.addEventListener("keydown", event => {
-      if (event.key === "Escape") { picker.open = false; picker.querySelector("summary").focus(); }
+    const dateRow = bookingDate.parentElement;
+    dateRow.addEventListener("keydown", event => {
+      if (event.key === "Escape") { event.preventDefault(); textDate.focus(); closeCalendar(); }
+      if (event.target === textDate && event.key === "ArrowDown") {
+        event.preventDefault(); openCalendar();
+        (grid.querySelector('[aria-pressed="true"]') || grid.querySelector("button"))?.focus();
+      }
+    });
+    document.addEventListener("pointerdown", event => {
+      if (!dateRow.contains(event.target)) closeCalendar();
+    });
+    dateRow.addEventListener("focusout", event => {
+      if (event.relatedTarget && !dateRow.contains(event.relatedTarget)) closeCalendar();
     });
     render();
   }
