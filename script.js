@@ -1,45 +1,69 @@
+// Interpret reservations in the restaurant's time zone, also for guests abroad.
+function isShortNoticeBooking(date, time, now = Date.now()) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return false;
+  const berlinTime = (day, clock) => {
+    const target = Date.parse(`${day}T${clock}:00Z`);
+    let timestamp = target;
+    for (let i = 0; i < 3; i++) {
+      const parts = Object.fromEntries(new Intl.DateTimeFormat("en-GB", {
+        timeZone: "Europe/Berlin", year: "numeric", month: "2-digit", day: "2-digit",
+        hour: "2-digit", minute: "2-digit", second: "2-digit", hourCycle: "h23"
+      }).formatToParts(new Date(timestamp)).map(part => [part.type, part.value]));
+      const wallTime = Date.parse(`${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}:${parts.second}Z`);
+      timestamp += target - wallTime;
+    }
+    return timestamp;
+  };
+  const end = now + 24 * 60 * 60 * 1000;
+  if (/^\d{2}:\d{2}$/.test(time)) {
+    const requested = berlinTime(date, time);
+    return requested >= now && requested <= end;
+  }
+  // Without a time, warn if any part of the selected day overlaps the next 24 hours.
+  return berlinTime(date, "23:59") + 59999 >= now && berlinTime(date, "00:00") <= end;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-  const schoolNoticeEnd = new Date("2026-08-18T00:00:00+02:00").getTime();
-  const schoolNoticeSoldOutEnd = new Date("2026-08-16T00:00:00+02:00").getTime();
-  const schoolNoticeDismissed = window.sessionStorage.getItem("freundschaftSchoolNotice2026") === "dismissed";
-  if (Date.now() < schoolNoticeEnd && !schoolNoticeDismissed) {
-    const schoolNoticePrimaryLabel = Date.now() < schoolNoticeSoldOutEnd ? "Heute ausgebucht" : "Weiter zur Webseite";
-    const schoolNotice = document.createElement("section");
-    schoolNotice.className = "site-notice school-notice";
-    schoolNotice.setAttribute("role", "dialog");
-    schoolNotice.setAttribute("aria-modal", "true");
-    schoolNotice.setAttribute("aria-labelledby", "school-notice-title");
-    schoolNotice.innerHTML = `
-      <div class="site-notice-card">
-        <img src="assets/images/schulanfang-hinweis.jpg" alt="Schultüte, Tafel und Stifte zum Schulanfang">
-        <div class="site-notice-copy">
-          <p class="script-title">schulanfang</p>
-          <h2 id="school-notice-title">Alles Gute zum Schulstart</h2>
-          <p>Wir wünschen allen Schulanfängern einen fröhlichen Start, viel Neugier und eine schöne erste Schulzeit.</p>
-          <div class="site-notice-actions">
-            <button class="bites-button" type="button" data-site-notice-primary>${schoolNoticePrimaryLabel}</button>
-            <button type="button" data-site-notice-close>Verstanden</button>
-          </div>
-        </div>
+  // Show the temporary email notice once per visit, including direct subpage visits.
+  const emailNoticeKey = "freundschaftEmailNotice202610";
+  let emailNoticeDismissed = false;
+  try {
+    emailNoticeDismissed = sessionStorage.getItem(emailNoticeKey) === "dismissed";
+  } catch (_) {
+    // The notice also works when browser storage is unavailable.
+  }
+  if (!emailNoticeDismissed && !document.querySelector("[data-short-notice-dialog]")) {
+    const notice = document.createElement("dialog");
+    notice.className = "email-notice";
+    notice.setAttribute("aria-labelledby", "email-notice-title");
+    notice.setAttribute("aria-describedby", "email-notice-description");
+    notice.innerHTML = `
+      <p class="email-notice-eyebrow">Wichtige Information</p>
+      <h2 id="email-notice-title">Hinweis zu Ihren E-Mail-Anfragen</h2>
+      <div id="email-notice-description">
+        <p>In den letzten Tagen gab es technische Probleme mit unserem E-Mail-Postfach. Daher konnten uns möglicherweise nicht alle Anfragen erreichen oder von uns beantwortet werden.</p>
+        <p>Falls Sie noch auf eine Antwort warten, bitten wir Sie, Ihre Anfrage erneut zu stellen oder telefonisch bei uns nachzufragen. Bei dringenden Anliegen erreichen Sie uns am besten telefonisch.</p>
+        <p>Wir bitten um Entschuldigung und danken Ihnen für Ihr Verständnis.</p>
       </div>
+      <div class="email-notice-phones">
+        <a href="tel:+493581879499">03581 87 94 99</a>
+        <a href="tel:+491711430783">0171 1430783</a>
+      </div>
+      <form method="dialog">
+        <button type="submit" autofocus>Verstanden – zur Website</button>
+      </form>
     `;
-    document.body.append(schoolNotice);
-
-    const closeSchoolNotice = () => {
-      window.sessionStorage.setItem("freundschaftSchoolNotice2026", "dismissed");
-      schoolNotice.classList.add("is-closing");
-      window.setTimeout(() => schoolNotice.remove(), 220);
-    };
-
-    schoolNotice.querySelectorAll("[data-site-notice-close], [data-site-notice-primary]").forEach((button) => {
-      button.addEventListener("click", closeSchoolNotice);
-    });
-    schoolNotice.addEventListener("click", (event) => {
-      if (event.target === schoolNotice) closeSchoolNotice();
-    });
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && document.body.contains(schoolNotice)) closeSchoolNotice();
-    });
+    document.body.append(notice);
+    const previousOverflow = document.documentElement.style.overflow;
+    notice.addEventListener("close", () => {
+      document.documentElement.style.overflow = previousOverflow;
+      try {
+        sessionStorage.setItem(emailNoticeKey, "dismissed");
+      } catch (_) {}
+      notice.remove();
+    }, { once: true });
+    notice.showModal();
+    document.documentElement.style.overflow = "hidden";
   }
 
   const cookieBanner = document.querySelector("[data-cookie-banner]");
@@ -98,7 +122,25 @@ document.addEventListener("DOMContentLoaded", () => {
   `;
   document.body.append(floatingPhone);
 
+  const shortNoticeDialog = document.querySelector("[data-short-notice-dialog]");
+  if (shortNoticeDialog && new URLSearchParams(window.location.search).get("kurzfristig") === "1") {
+    const previousOverflow = document.documentElement.style.overflow;
+    shortNoticeDialog.addEventListener("close", () => {
+      document.documentElement.style.overflow = previousOverflow;
+    }, { once: true });
+    shortNoticeDialog.showModal();
+    document.documentElement.style.overflow = "hidden";
+  }
+
   const bookingDate = document.querySelector("#booking-date");
+  const inquiryForm = bookingDate?.closest("form");
+  inquiryForm?.addEventListener("submit", () => {
+    const next = inquiryForm.querySelector('input[name="_next"]');
+    const time = inquiryForm.querySelector("#booking-time").value;
+    const destination = new URL("https://www.zur-alten-freundschaft.de/danke.html");
+    if (isShortNoticeBooking(bookingDate.value, time)) destination.searchParams.set("kurzfristig", "1");
+    next.value = destination.href;
+  });
   const openDatePicker = () => {
     if (typeof bookingDate?.showPicker !== "function") return;
     try {

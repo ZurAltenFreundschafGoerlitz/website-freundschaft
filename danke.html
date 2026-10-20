@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&amp;family=Miniver&amp;family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=20261020-notices">
   </head>
   <body class="bites-page">
     <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
@@ -53,6 +53,17 @@
       </section>
     </main>
 
+    <dialog class="email-notice" data-short-notice-dialog aria-labelledby="short-notice-title" aria-describedby="short-notice-description">
+      <p class="email-notice-eyebrow">Kurzfristige Reservierung</p>
+      <h2 id="short-notice-title">Bitte zusätzlich anrufen</h2>
+      <div id="short-notice-description">
+        <p>Ihr Wunschtermin liegt innerhalb der nächsten 24 Stunden. Bitte reservieren Sie zusätzlich telefonisch unter <strong>0171 1430783</strong>, da wir eine so kurzfristige Antwort auf Ihre Anfrage nicht immer garantieren können.</p>
+        <p>Ihre Anfrage ist noch keine bestätigte Reservierung.</p>
+      </div>
+      <div class="email-notice-phones"><a href="tel:+491711430783">Jetzt anrufen: 0171 1430783</a></div>
+      <form method="dialog"><button type="submit" autofocus>Verstanden</button></form>
+    </dialog>
+
     <footer class="page-footer bites-footer">
       <p>Zur Alten Freundschaft | Biesnitzer Str. 29 | 02826 Görlitz | 0171 1430783</p>
       <img class="footer-logo" src="assets/images/logo-small.png" alt="Zur Alten Freundschaft Logo">
@@ -71,6 +82,6 @@
         <button type="button" data-cookie-accept>Gib mir den Keks!</button>
       </div>
     </div>
-    <script src="script.js"></script>
+    <script src="script.js?v=20261020-notices"></script>
   </body>
 </html>

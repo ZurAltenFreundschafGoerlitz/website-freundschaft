@@ -4023,3 +4023,51 @@ dialog.lightbox::backdrop {
     display: none;
   }
 }
+
+/* Temporary notice about email enquiries. Native dialog provides focus trapping and Escape. */
+.email-notice {
+  box-sizing: border-box;
+  width: min(620px, calc(100% - 32px));
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: clamp(24px, 5vw, 42px);
+  overflow-y: auto;
+  color: #26383a;
+  background: #faf6ee;
+  border: 1px solid #d7c6b6;
+  border-top: 6px solid #7f1d24;
+  border-radius: 8px;
+  box-shadow: 0 24px 90px #0006;
+  font-family: Nunito, Arial, sans-serif;
+}
+.email-notice::backdrop { background: rgba(7, 19, 22, .76); }
+.email-notice .email-notice-eyebrow {
+  margin: 0 0 12px;
+  color: #7f1d24;
+  font-size: .8rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.email-notice h2 {
+  margin: 0 0 20px;
+  font-size: clamp(1.6rem, 5vw, 2.1rem);
+  line-height: 1.15;
+}
+.email-notice p { margin: 0 0 16px; font-size: 1rem; line-height: 1.6; }
+.email-notice-phones { display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 22px 0; }
+.email-notice-phones a { color: #7f1d24; font-weight: 800; text-underline-offset: 4px; padding: 8px 0; }
+.email-notice button {
+  width: 100%;
+  min-height: 48px;
+  padding: 14px 18px;
+  border: 0;
+  border-radius: 3px;
+  background: #7f1d24;
+  color: white;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+.email-notice button:hover { background: #60151b; }
+.email-notice :focus-visible { outline: 3px solid #26383a; outline-offset: 4px; }
